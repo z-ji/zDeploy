@@ -18,7 +18,9 @@ namespace zDeploy
             string text = File.ReadAllText("zDeploy.json",
                                                   Encoding.UTF8);
             var config = Json.Decode(text);
-
+            Console.WriteLine(config.host);
+            Console.ReadLine();
+            Environment.Exit(0);
             //read apache config
             string apacheconfig = File.ReadAllText(config.apacheConfig,
                                                  Encoding.UTF8);
@@ -32,6 +34,7 @@ namespace zDeploy
 
 
             PrivateKeyFile key = new PrivateKeyFile("private");
+            var connectionInfo = new ConnectionInfo("",22,"",null);
             using (var sftpClient = new SftpClient(connectionInfo))
             {
                 sftpClient.Connect();
